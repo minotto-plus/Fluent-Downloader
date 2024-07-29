@@ -54,17 +54,17 @@ namespace Fluent_Downloader
             DownloadProgressBar.ShowPaused = false;
             DownloadProgressBar.ShowError = false;
 
-            // ���͒l���擾
+            // 入力値を取得
             string url = URLTextBox.Text;
             string outputFolderPath = OutputFolderPathTextBox.Text;
 
-            // URL����̏ꍇ�A�G���[���b�Z�[�W��\��
+            // URLが空の場合、エラーメッセージを表示
             if (string.IsNullOrEmpty(url))
             {
                 var errorDialog = new ContentDialog
                 {
-                    Title = "�G���[",
-                    Content = "URL����ł��B",
+                    Title = "エラー",
+                    Content = "URLが空です。",
                     PrimaryButtonText = "OK",
                     XamlRoot = this.Content.XamlRoot,
                 };
@@ -72,13 +72,13 @@ namespace Fluent_Downloader
                 return;
             }
 
-            // �o�̓t�H���_�p�X����̏ꍇ�A�G���[���b�Z�[�W��\��
+            // 出力フォルダパスが空の場合、エラーメッセージを表示
             if (string.IsNullOrEmpty(outputFolderPath))
             {
                 var successDialog = new ContentDialog
                 {
-                    Title = "����",
-                    Content = "�o�̓t�H���_�p�X����ł��B",
+                    Title = "成功",
+                    Content = "出力フォルダパスが空です。",
                     PrimaryButtonText = "OK",
                     XamlRoot = this.Content.XamlRoot,
                 };
@@ -93,33 +93,33 @@ namespace Fluent_Downloader
             {
                 var _youtubeClient = new YoutubeClient();
 
-                // ��������擾
+                // 動画情報を取得
                 var video = await _youtubeClient.Videos.GetAsync(url);
 
-                // ����̃X�g���[�������擾
+                // 動画のストリーム情報を取得
                 var streamManifest = await _youtubeClient.Videos.Streams.GetManifestAsync(video.Id);
 
-                // �ō��掿�̃r�f�I�X�g���[����I��
+                // 最高画質のビデオストリームを選択
                 var videoStreamInfo = streamManifest.GetVideoStreams().OrderByDescending(s => s.Bitrate).First();
 
-                // �ō��掿�̃I�[�f�B�I�X�g���[����I��
+                // 最高画質のオーディオストリームを選択
                 var audioStreamInfo = streamManifest.GetAudioStreams().OrderByDescending(s => s.Bitrate).First();
 
-                // �t�@�C�������쐬
+                // ファイル名を作成
                 string fileName = Path.Combine(outputFolderPath, video.Title + ".mp4");
 
-                // �_�E�����[�h����
+                // ダウンロード処理
                 double totalProgress = 0;
                 double currentProgress = 0;
                 var progress = new Progress<double>(percentage =>
                 {
-                    // �i���󋵂��X�V
+                    // 進捗状況を更新
                     currentProgress = percentage;
                     totalProgress = (currentProgress / 2) + (currentProgress / 2);
                     DownloadProgressBar.Value = totalProgress;
                 });
 
-                // �r�f�I�X�g���[�����_�E�����[�h
+                // ビデオストリームをダウンロード
                 var videoFileName = Path.Combine(outputFolderPath, video.Title + "-video.mp4");
                 await _youtubeClient.Videos.Streams.DownloadAsync(
                     videoStreamInfo,
@@ -127,7 +127,7 @@ namespace Fluent_Downloader
                     progress
                 );
 
-                // �I�[�f�B�I�X�g���[�����_�E�����[�h
+                // オーディオストリームをダウンロード
                 var audioFileName = Path.Combine(outputFolderPath, video.Title + "-audio.m4a");
                 await _youtubeClient.Videos.Streams.DownloadAsync(
                     audioStreamInfo,
@@ -135,13 +135,13 @@ namespace Fluent_Downloader
                     progress
                 );
 
-                // �I�[�f�B�I�X�g���[���ƃr�f�I�X�g���[��������
+                // オーディオストリームとビデオストリームを結合
                 using (var videoFile = new FileStream(videoFileName, FileMode.Open, FileAccess.Read))
                 using (var audioFile = new FileStream(audioFileName, FileMode.Open, FileAccess.Read))
                 {
-                    // FFmpeg ���g�p���ăI�[�f�B�I�ƃr�f�I������
-                    // FFmpeg �͕ʓr�C���X�g�[������K�v������܂�
-                    // FFmpeg �̃p�X��K�X�������Ă�������
+                    // FFmpeg を使用してオーディオとビデオを結合
+                    // FFmpeg は別途インストールする必要があります
+                    // FFmpeg のパスを適宜調整してください
 
 
                     string ffmpegPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ffmpeg", "ffmpeg.exe"); ;
@@ -152,7 +152,7 @@ namespace Fluent_Downloader
 
                     var pathDialog = new ContentDialog
                     {
-                        Title = "����",
+                        Title = "成功",
                         Content = ffmpegPath,
                         PrimaryButtonText = "OK",
                         XamlRoot = this.Content.XamlRoot,
@@ -174,14 +174,14 @@ namespace Fluent_Downloader
                     ffmpegProcess.WaitForExit();
                 }
 
-                // �����t�@�C���폜
+                // 音声ファイル削除
                 File.Delete(audioFileName);
                 File.Delete(videoFileName);
 
                 var successDialog = new ContentDialog
                 {
-                    Title = "����",
-                    Content = "�_�E�����[�h���������܂����B",
+                    Title = "成功",
+                    Content = "ダウンロードが完了しました。",
                     PrimaryButtonText = "OK",
                     XamlRoot = this.Content.XamlRoot,
                 };
@@ -193,8 +193,8 @@ namespace Fluent_Downloader
                 DownloadProgressBar.ShowError = true;
                 var errorDialog = new ContentDialog
                 {
-                    Title = "�G���[",
-                    Content = "�_�E�����[�h���ɃG���[���������܂����B",
+                    Title = "エラー",
+                    Content = "ダウンロード中にエラーが発生しました。",
                     PrimaryButtonText = "Not OK",
                     XamlRoot = this.Content.XamlRoot,
                 };

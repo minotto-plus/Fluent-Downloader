@@ -17,6 +17,7 @@
 	<ApplicationIcon>Assets\icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="ffmpeg\ffmpeg.exe" />
     <None Remove="Home.xaml" />
   </ItemGroup>
 
@@ -28,6 +29,7 @@
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+    <Content Include="ffmpeg\ffmpeg.exe" />
   </ItemGroup>
 
   <ItemGroup>
@@ -55,9 +57,6 @@
     <Page Update="Home.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ffmpeg\" />
   </ItemGroup>
 
   <!--

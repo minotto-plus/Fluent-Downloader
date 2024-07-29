@@ -29,6 +29,7 @@ namespace Fluent_Downloader
         public Home()
         {
             this.InitializeComponent();
+            PathInfoBar.IsOpen = false;
 
 
         }
@@ -54,6 +55,9 @@ namespace Fluent_Downloader
             DownloadProgressBar.ShowPaused = false;
             DownloadProgressBar.ShowError = false;
 
+            PathInfoBar.IsOpen = false;
+
+
             // 入力値を取得
             string url = URLTextBox.Text;
             string outputFolderPath = OutputFolderPathTextBox.Text;
@@ -77,7 +81,7 @@ namespace Fluent_Downloader
             {
                 var successDialog = new ContentDialog
                 {
-                    Title = "成功",
+                    Title = "エラー",
                     Content = "出力フォルダパスが空です。",
                     PrimaryButtonText = "OK",
                     XamlRoot = this.Content.XamlRoot,
@@ -91,6 +95,12 @@ namespace Fluent_Downloader
 
             try
             {
+
+                string ffmpegPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ffmpeg", "ffmpeg.exe");
+                PathInfoBar.IsOpen = true;
+                PathInfoBar.Message = ffmpegPath;
+
+
                 var _youtubeClient = new YoutubeClient();
 
                 // 動画情報を取得
@@ -144,20 +154,7 @@ namespace Fluent_Downloader
                     // FFmpeg のパスを適宜調整してください
 
 
-                    string ffmpegPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ffmpeg", "ffmpeg.exe"); ;
 
-
-
-
-
-                    var pathDialog = new ContentDialog
-                    {
-                        Title = "成功",
-                        Content = ffmpegPath,
-                        PrimaryButtonText = "OK",
-                        XamlRoot = this.Content.XamlRoot,
-                    };
-                    await pathDialog.ShowAsync();
 
 
                     var ffmpegProcess = new System.Diagnostics.Process
@@ -172,6 +169,7 @@ namespace Fluent_Downloader
                     };
                     ffmpegProcess.Start();
                     ffmpegProcess.WaitForExit();
+
                 }
 
                 // 音声ファイル削除

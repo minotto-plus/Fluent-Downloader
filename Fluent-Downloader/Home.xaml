@@ -53,6 +53,13 @@
         </StackPanel>
         <StackPanel
             Grid.Row="2">
+            <InfoBar
+                IsOpen="False"
+                Severity="Informational"
+                Title="Debug"
+                Message=""
+                Margin="0,0,0,20"
+                x:Name="PathInfoBar"/>
             <ProgressBar
                 x:Name="DownloadProgressBar"
                 IsIndeterminate="True"

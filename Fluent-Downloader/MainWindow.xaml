@@ -8,7 +8,38 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Button x:Name="myButton" Click="myButton_Click">Click Me</Button>
-    </StackPanel>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Grid x:Name="AppTitleBar" Height="48" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="LeftPaddingColumn" Width="0" />
+                <ColumnDefinition x:Name="IconColumn" Width="Auto" />
+                <ColumnDefinition x:Name="TitleColumn" Width="Auto" />
+                <ColumnDefinition x:Name="LeftDragColumn" Width="*" />
+                <ColumnDefinition x:Name="RightPaddingColumn" Width="0" />
+            </Grid.ColumnDefinitions>
+            <Image Source="Assets/icon.png"
+                   Grid.Column="2"
+                   VerticalAlignment="Center"
+                   Width="20"
+                   Height="20"
+                   Margin="18,0,0,0"/>
+            <TextBlock x:Name="TitleTextBlock"
+                       Text="Fluent-Downloader"
+                       Style="{StaticResource CaptionTextBlockStyle}"
+                       Grid.Column="3"
+                       VerticalAlignment="Center"
+                       Margin="14,0,0,0" />
+
+        </Grid>
+
+        <Frame x:Name="ContentFrame" IsNavigationStackEnabled="False" Grid.Row="1" Margin="20,0,20,20"/>
+
+
+
+    </Grid>
 </Window>

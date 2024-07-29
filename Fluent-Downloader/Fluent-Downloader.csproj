@@ -15,6 +15,7 @@
 	<WindowsPackageType>None</WindowsPackageType>
 	<PackageIcon>Square150x150Logo.scale-200.png</PackageIcon>
 	<ApplicationIcon>Assets\icon.ico</ApplicationIcon>
+	<Title>Fluent-Downloader</Title>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="ffmpeg\ffmpeg.exe" />
@@ -29,7 +30,9 @@
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
-    <Content Include="ffmpeg\ffmpeg.exe" />
+    <Content Include="ffmpeg\ffmpeg.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -46,6 +49,11 @@
   -->
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <ProjectCapability Include="Msix" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Update="Assets\icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Update="Assets\Square150x150Logo.scale-200.png">

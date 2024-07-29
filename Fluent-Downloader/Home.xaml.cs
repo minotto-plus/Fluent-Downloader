@@ -67,8 +67,8 @@ namespace Fluent_Downloader
             {
                 var errorDialog = new ContentDialog
                 {
-                    Title = "エラー",
-                    Content = "URLが空です。",
+                    Title = "Error",
+                    Content = "The URL field is empty.",
                     PrimaryButtonText = "OK",
                     XamlRoot = this.Content.XamlRoot,
                 };
@@ -81,8 +81,8 @@ namespace Fluent_Downloader
             {
                 var successDialog = new ContentDialog
                 {
-                    Title = "エラー",
-                    Content = "出力フォルダパスが空です。",
+                    Title = "Error",
+                    Content = "The output folder path is empty.",
                     PrimaryButtonText = "OK",
                     XamlRoot = this.Content.XamlRoot,
                 };
@@ -178,8 +178,8 @@ namespace Fluent_Downloader
 
                 var successDialog = new ContentDialog
                 {
-                    Title = "成功",
-                    Content = "ダウンロードが完了しました。",
+                    Title = "Success",
+                    Content = "Download completed successfully.",
                     PrimaryButtonText = "OK",
                     XamlRoot = this.Content.XamlRoot,
                 };
@@ -191,8 +191,8 @@ namespace Fluent_Downloader
                 DownloadProgressBar.ShowError = true;
                 var errorDialog = new ContentDialog
                 {
-                    Title = "エラー",
-                    Content = "ダウンロード中にエラーが発生しました。",
+                    Title = "Error",
+                    Content = "An error occurred during the download.",
                     PrimaryButtonText = "Not OK",
                     XamlRoot = this.Content.XamlRoot,
                 };

@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35122.118
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fluent-Downloader", "Fluent-Downloader\Fluent-Downloader.csproj", "{52DC15F7-C261-4B96-9628-490B7FB69FDB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fluent-Downloader", "Fluent-Downloader\Fluent-Downloader.csproj", "{52DC15F7-C261-4B96-9628-490B7FB69FDB}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Installer", "Installer\Installer.vdproj", "{EC1A7537-AA4A-4449-9BA2-81C2DE4EA6AC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,12 @@ Global
 		{52DC15F7-C261-4B96-9628-490B7FB69FDB}.Release|x86.ActiveCfg = Release|x86
 		{52DC15F7-C261-4B96-9628-490B7FB69FDB}.Release|x86.Build.0 = Release|x86
 		{52DC15F7-C261-4B96-9628-490B7FB69FDB}.Release|x86.Deploy.0 = Release|x86
+		{EC1A7537-AA4A-4449-9BA2-81C2DE4EA6AC}.Debug|ARM64.ActiveCfg = Debug
+		{EC1A7537-AA4A-4449-9BA2-81C2DE4EA6AC}.Debug|x64.ActiveCfg = Debug
+		{EC1A7537-AA4A-4449-9BA2-81C2DE4EA6AC}.Debug|x86.ActiveCfg = Debug
+		{EC1A7537-AA4A-4449-9BA2-81C2DE4EA6AC}.Release|ARM64.ActiveCfg = Release
+		{EC1A7537-AA4A-4449-9BA2-81C2DE4EA6AC}.Release|x64.ActiveCfg = Release
+		{EC1A7537-AA4A-4449-9BA2-81C2DE4EA6AC}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
